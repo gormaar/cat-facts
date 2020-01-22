@@ -11,7 +11,7 @@ const [catFact, setCatFact] = useState();
 
 useEffect(() => {
 	catFactFetch();
-});
+}, [catFact]);
 
 const catFactFetch = async () => {
 	const header = { "Content-type": "application/json", method: "GET" };
