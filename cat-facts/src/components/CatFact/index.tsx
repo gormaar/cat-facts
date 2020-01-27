@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CatFact from "./CatFact";
 
 const CatFactContainer: React.FC = () => {
@@ -7,32 +7,33 @@ const CatFactContainer: React.FC = () => {
 	const [catImage, setCatImage] = useState();
 
 	const NextFact = () => {
-		CatFactFetch();
 		CatImageFetch();
+		CatFactFetch();
 	};
-	//Dette ser faen ikkje ud men la gå
+
 	const CatImageFetch = async () => {
-		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 		const header = { "Content-type": "application/json", method: "GET" };
-		const endpoint = "https://api.thecatapi.com/v1/images/search";
+		const endpoint: string = "https://api.thecatapi.com/v1/images/search";
 		const response = await fetch(endpoint, header)
 			.then(response => response.json())
 			.catch(error => console.log("Error", error));
-		console.log(response);
 
-		setCatImage(response.url);
+		setCatImage(response[0].url);
 	};
 
 	const CatFactFetch = async () => {
-		const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+		const proxyUrl: string = "https://cors-anywhere.herokuapp.com/";
 		const header = { "Content-type": "application/json", method: "GET" };
-		const endpoint = "https://cat-fact.herokuapp.com/facts/random";
+		const endpoint: string = "https://cat-fact.herokuapp.com/facts/random";
 		const response = await fetch(proxyUrl + endpoint, header)
 			.then(response => response.json())
 			.catch(e => console.log("Error", e));
-		console.log(response);
+
 		setCatFact(response.text);
 	};
+	if (!catFact) {
+		NextFact();
+	}
 
 	return <CatFact fact={catFact} image={catImage} onNextFact={NextFact} />;
 };

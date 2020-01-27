@@ -10,12 +10,9 @@ type CatFacts = {
 const CatFact: React.FC<CatFacts> = props => {
 	return (
 		<div className={styles.container}>
-			<div>
-				<h3>{props.fact}</h3>
-				<img src={props.image} alt="" />
-				<img src="https://cdn2.thecatapi.com/images/S97Qj5YYO.jpg" alt="" />
-				<button onClick={props.onNextFact}>Next</button>
-			</div>
+			<h3>{props.fact}</h3>
+			<img src={props.image} alt="" />
+			<button onClick={props.onNextFact}>Next Fact</button>
 		</div>
 	);
 };
